@@ -26,10 +26,10 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Workflow restore
-      run: dotnet workload restore maui-android --project MauiContacts/MauiContacts.csproj
+      run: dotnet workload restore android maui-android --project MauiContacts/MauiContacts.csproj
     - name: Workflow restore part 2, run only on Windows and macOS
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'windows')
-      run: dotnet workload restore maui-tizen wasi-experimental ios --project MauiContacts/MauiContacts.csproj
+      run: dotnet workload restore maui-tizen wasi-experimental ios maui-ios --project MauiContacts/MauiContacts.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
