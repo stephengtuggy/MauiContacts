@@ -12,8 +12,12 @@ on:
 
 jobs:
   build:
+    runs-on: ${{ matrix.os }}
 
-    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ windows-2022, windows-2025, ubuntu-22.04, ubuntu-24.04, macos-14, macos-15 ]
 
     steps:
     - uses: actions/checkout@v4
@@ -22,7 +26,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Workflow restore
-      run: dotnet workload restore maui-android maui-tizen wasi-experimental maui-ios --project MauiContacts/MauiContacts.csproj
+      run: dotnet workload restore --project MauiContacts/MauiContacts.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
