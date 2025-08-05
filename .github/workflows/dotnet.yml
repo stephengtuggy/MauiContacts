@@ -22,7 +22,7 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Workflow restore
-      run: dotnet workload restore maui-android maui-tizen wasi-experimental ios
+      run: dotnet workload restore maui-android maui-tizen wasi-experimental ios --project MauiContacts/MauiContacts.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
