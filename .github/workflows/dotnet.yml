@@ -20,13 +20,16 @@ jobs:
         os: [ windows-2022, windows-2025, ubuntu-22.04, ubuntu-24.04, macos-14, macos-15 ]
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
     - name: Workflow restore
       run: dotnet workload restore --project MauiContacts/MauiContacts.csproj
+    - name: iOS workflow restore
+      if: (matrix.os == 'macos-14') || (matrix.os == 'macos-15')
+      run: dotnet workload restore ios --project MauiContacts/MauiContacts.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
