@@ -24,12 +24,12 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
       with:
-        dotnet-version: 8.0.x
+        dotnet-version: 9.0.x
     - name: Workflow restore
-      run: dotnet workload restore android maui-android net8.0-android34.0 --project MauiContacts/MauiContacts.csproj
+      run: dotnet workload restore android maui-android net9.0-android34.0 --project MauiContacts/MauiContacts.csproj
     - name: Workflow restore part 2, run only on Windows and macOS
       if: contains(matrix.os, 'macos') || contains(matrix.os, 'windows')
-      run: dotnet workload restore maui-tizen wasi-experimental net8.0-ios maui-ios net8.0-windows10.0.19041.0 net8.0-maccatalyst --project MauiContacts/MauiContacts.csproj
+      run: dotnet workload restore net9.0-ios maui-ios net9.0-windows10.0.19041.0 net9.0-maccatalyst --project MauiContacts/MauiContacts.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
